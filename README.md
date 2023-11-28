@@ -33,7 +33,7 @@
 ## Установка
 
 ##### Установка:
-Вы можете установить пакет, используя **[NuGet](https://)**
+Вы можете установить пакет, используя **[NuGet](https://www.nuget.org/packages/GigaChatSDK/)**
 
 ```bash
 NuGet\Install-Package LikhodedDynamics.Sber.GigaChatSDK -Version 1.0.0
