@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+    <Description>About
+Unofficial .NET Library for working with Giga Chat AI by Sber/ Неофициальная .NET библиотека для работы с GigaChat AI от Сбера</Description>
+    <PackageProjectUrl>https://github.com/likhoded/GigaChatSDK</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/likhoded/GigaChatSDK</RepositoryUrl>
+    <PackageTags>GigaChat</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

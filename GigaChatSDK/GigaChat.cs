@@ -95,8 +95,8 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
         /// <summary>
         /// Отправление запроса к модели
         /// </summary>
-        /// <returns>Возвращает Response с ответом модели с учетом переданных сообщений..</returns>
-        /// <param name="query">Запрос к модели.</param>
+        /// <returns>Response с ответом модели с учетом переданных сообщений..</returns>
+        /// <param name="query">Запрос к модели в виде объекта запроса.</param>
         public async Task<Response> CompletionsAsync(MessageQuery query)
         {
             if (Token != null)
@@ -136,6 +136,54 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
                 return null;
             }
         }
+        /// <summary>
+        /// Отправление запроса к модели
+        /// </summary>
+        /// <returns>Response с ответом модели с учетом переданных сообщений..</returns>
+        /// <param name="_message">Запрос к модели в виде 1 строки с непосредственно с запросом.</param>
+        public async Task<Response> CompletionsAsync(string _message)
+        {
+            if (Token != null)
+            {
+                HttpClientHandler clientHandler = new HttpClientHandler();
+
+                string responseBody;
+                Response DeserializedResponse;
+
+                if (ignoreTLS == true)
+                {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    ServicePointManager.ServerCertificateValidationCallback +=
+                        (sender, cert, chain, sslPolicyErrors) => { return true; };
+                    clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                }
+
+                MessageQuery query = new MessageQuery();
+                query.messages.Add(new MessageContent("user", _message));
+
+                using (var client = new HttpClient(clientHandler))
+                {
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, URL + "chat/completions");
+
+                    request.Headers.Add("Authorization", "Bearer " + Token.AccessToken);
+
+                    request.Content = new StringContent(JsonSerializer.Serialize(query));
+                    request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    HttpResponseMessage response = await client.SendAsync(request);
+                    response.EnsureSuccessStatusCode();
+                    responseBody = await response.Content.ReadAsStringAsync();
+                    DeserializedResponse = JsonSerializer.Deserialize<Response>(responseBody);
+                    Console.WriteLine(responseBody);
+                    client.Dispose();
+                }
+                return DeserializedResponse;
+            }
+            else
+            {
+                return null;
+            }
+        }
         public async Task<Model> ModelAsync(string model)
         {
             if (Token != null)
@@ -143,7 +191,7 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
                 HttpClientHandler clientHandler = new HttpClientHandler();
 
                 string responseBody;
-                Model? DeserializedModel;
+                Model? DeserializedModel = null;
 
                 if (ignoreTLS == true)
                 {
