@@ -42,7 +42,7 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
 
         private bool saveImage { get; set; } = false;
 
-        private string saveDirectory { get; set; } = Directory.GetCurrentDirectory();
+        public string SaveDirectory { get; set; } = Directory.GetCurrentDirectory();
         private long? ExpiresAt { get; set; }
         public GigaChat(string secretKey, bool isCommercial, bool ignoreTLS, bool saveImage)
         {
@@ -280,7 +280,7 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
                     response.EnsureSuccessStatusCode();
                     if (saveImage == true)
                     {
-                        System.IO.File.WriteAllBytes(Path.Combine(saveDirectory, fileId + ".jpg"), await response.Content.ReadAsByteArrayAsync());
+                        System.IO.File.WriteAllBytes(Path.Combine(SaveDirectory, fileId + ".jpg"), await response.Content.ReadAsByteArrayAsync());
                     }
                     return await response.Content.ReadAsByteArrayAsync();
                 }
