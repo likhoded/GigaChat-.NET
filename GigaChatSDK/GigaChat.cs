@@ -14,13 +14,15 @@ using static LikhodedDynamics.Sber.GigaChatSDK.Models.MessageQuery;
 using GigaChatSDK.Models;
 using System.Collections;
 using System.Text.RegularExpressions;
+using System.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LikhodedDynamics.Sber.GigaChatSDK
 {
     public class GigaChat
     {
         private string URL = "https://gigachat.devices.sberbank.ru/api/v1/";
-        public Token? Token { get; set; }
+        public Token Token { get; set; }
         /// <summary>
         /// Авторизационные данные
         /// </summary>
@@ -31,25 +33,29 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
         /// GIGACHAT_API_PERS — доступ для физических лиц.
         /// GIGACHAT_API_CORP — доступ для юридических лиц.
         /// </summary>
-        private bool isCommercial = false;
+        private bool isCommercial { get; set; } = false;
         /// <summary>
         /// true - включает игнорирование сертификатов безопасности
         /// Необходимо для систем имеющих проблемы с сертификатами МинЦифр.
         /// </summary>
-        private bool ignoreTLS = true;
+        private bool ignoreTLS { get; set; } = true;
 
+        private bool saveImage { get; set; } = false;
+
+        private string saveDirectory { get; set; } = Directory.GetCurrentDirectory();
         private long? ExpiresAt { get; set; }
-        public GigaChat(string secretKey, bool isCommercial, bool ignoreTLS)
+        public GigaChat(string secretKey, bool isCommercial, bool ignoreTLS, bool saveImage)
         {
             this.secretKey = secretKey;
             this.isCommercial = isCommercial;
             this.ignoreTLS = ignoreTLS;
+            this.saveImage = saveImage;
         }
         /// <summary>
         /// Генерация Токена
         /// </summary>
         /// <returns>Token.</returns>
-        public async Task<Token?> CreateTokenAsync()
+        public async Task<Token> CreateTokenAsync()
         {
             try
             {
@@ -272,6 +278,10 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
 
                     HttpResponseMessage response = await client.SendAsync(request);
                     response.EnsureSuccessStatusCode();
+                    if (saveImage == true)
+                    {
+                        System.IO.File.WriteAllBytes(Path.Combine(saveDirectory, fileId + ".jpg"), await response.Content.ReadAsByteArrayAsync());
+                    }
                     return await response.Content.ReadAsByteArrayAsync();
                 }
             }
