@@ -13,7 +13,7 @@ namespace LikhodedDynamics.Sber.GigaChatSDK.Models
         [JsonPropertyName("access_token")]
         public string AccessToken { get; set; }
         /// <summary>
-        /// Время получения в Unix
+        /// Время истечения в Unix
         /// </summary>
         [JsonPropertyName("expires_at")]
         public long ExpiresAt { get; set; }

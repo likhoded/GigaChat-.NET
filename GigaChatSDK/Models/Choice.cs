@@ -8,12 +8,12 @@ namespace LikhodedDynamics.Sber.GigaChatSDK.Models
     public class Choice
     {
         [JsonPropertyName("message")]
-        public MessageContent message { get; set; }
+        public MessageContent? message { get; set; }
 
         [JsonPropertyName("index")]
         public int index { get; set; }
 
         [JsonPropertyName("finish_reason")]
-        public string finish_reason { get; set; }
+        public string? finish_reason { get; set; }
     }
 }

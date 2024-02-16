@@ -57,7 +57,7 @@ namespace LikhodedDynamics.Sber.GigaChatSDK.Models
         /// </summary>
         [JsonPropertyName("max_tokens")]
         public long max_tokens { get; set; }
-        public MessageQuery(List<MessageContent> messages = null, string model = "GigaChat:latest",  float temperature = 0.87f, float top_p = 0.47f, long n = 1, bool stream = false, long max_tokens = 512)
+        public MessageQuery(List<MessageContent>? messages = null, string model = "GigaChat:latest",  float temperature = 0.87f, float top_p = 0.47f, long n = 1, bool stream = false, long max_tokens = 512)
         {
             List<MessageContent> Contents = new List<MessageContent>();
             this.model = model;

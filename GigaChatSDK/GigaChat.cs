@@ -11,13 +11,16 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using LikhodedDynamics.Sber.GigaChatSDK.Models;
 using static LikhodedDynamics.Sber.GigaChatSDK.Models.MessageQuery;
+using GigaChatSDK.Models;
+using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace LikhodedDynamics.Sber.GigaChatSDK
 {
     public class GigaChat
     {
         private string URL = "https://gigachat.devices.sberbank.ru/api/v1/";
-        public Token Token { get; set; }
+        public Token? Token { get; set; }
         /// <summary>
         /// Авторизационные данные
         /// </summary>
@@ -35,6 +38,7 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
         /// </summary>
         private bool ignoreTLS = true;
 
+        private long? ExpiresAt { get; set; }
         public GigaChat(string secretKey, bool isCommercial, bool ignoreTLS)
         {
             this.secretKey = secretKey;
@@ -45,7 +49,7 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
         /// Генерация Токена
         /// </summary>
         /// <returns>Token.</returns>
-        public async Task<Token> CreateTokenAsync()
+        public async Task<Token?> CreateTokenAsync()
         {
             try
             {
@@ -82,7 +86,7 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
                     response.EnsureSuccessStatusCode();
                     string responseBody = await response.Content.ReadAsStringAsync();
                     Token = JsonSerializer.Deserialize<Token>(responseBody);
-                    
+                    ExpiresAt = Token.ExpiresAt;
                     return Token;
                 }
             }
@@ -97,14 +101,18 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
         /// </summary>
         /// <returns>Response с ответом модели с учетом переданных сообщений..</returns>
         /// <param name="query">Запрос к модели в виде объекта запроса.</param>
-        public async Task<Response> CompletionsAsync(MessageQuery query)
+        public async Task<Response?> CompletionsAsync(MessageQuery query)
         {
+            if(ExpiresAt < ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds())
+            {
+                await CreateTokenAsync();
+            }
             if (Token != null)
             {
                 HttpClientHandler clientHandler = new HttpClientHandler();
 
                 string responseBody;
-                Response DeserializedResponse;
+                Response? DeserializedResponse;
 
                 if (ignoreTLS == true)
                 {
@@ -141,14 +149,18 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
         /// </summary>
         /// <returns>Response с ответом модели с учетом переданных сообщений..</returns>
         /// <param name="_message">Запрос к модели в виде 1 строки с непосредственно с запросом.</param>
-        public async Task<Response> CompletionsAsync(string _message)
+        public async Task<Response?> CompletionsAsync(string _message)
         {
+            if (ExpiresAt < ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds())
+            {
+                await CreateTokenAsync();
+            }
             if (Token != null)
             {
                 HttpClientHandler clientHandler = new HttpClientHandler();
 
                 string responseBody;
-                Response DeserializedResponse;
+                Response? DeserializedResponse;
 
                 if (ignoreTLS == true)
                 {
@@ -184,13 +196,105 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
                 return null;
             }
         }
-        public async Task<Model> ModelAsync(string model)
+
+        /// <summary>
+        /// Создание эмбеддинга
+        /// Доступно для моделей Plus и Pro
+        /// </summary>
+        /// <returns>EmbeddingResponse с векторным представлением соответствующих текстовых запросов. 
+        /// Индекс объекта с векторным представлением (поле index) соответствует индексу строки в массиве input запроса.</returns>
+        /// <param name="_request">Запрос к модели в виде объекта запроса.</param>
+        public async Task<EmbeddingResponse?> EmbeddingAsync(EmbeddingRequest _request)
         {
+            if (ExpiresAt < ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds())
+            {
+                await CreateTokenAsync();
+            }
             if (Token != null)
             {
                 HttpClientHandler clientHandler = new HttpClientHandler();
 
                 string responseBody;
+                EmbeddingResponse? DeserializedResponse;
+                if (ignoreTLS == true)
+                {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    ServicePointManager.ServerCertificateValidationCallback +=
+                        (sender, cert, chain, sslPolicyErrors) => { return true; };
+                    clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                }
+                using (var client = new HttpClient(clientHandler))
+                {
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, URL + "embeddings");
+
+                    request.Headers.Add("Authorization", "Bearer " + Token.AccessToken);
+
+                    request.Content = new StringContent(JsonSerializer.Serialize(_request));
+                    request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    HttpResponseMessage response = await client.SendAsync(request);
+                    response.EnsureSuccessStatusCode();
+                    responseBody = await response.Content.ReadAsStringAsync();
+                    DeserializedResponse = JsonSerializer.Deserialize<EmbeddingResponse>(responseBody);
+                    
+                    client.Dispose();
+                }
+                return DeserializedResponse;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// Получение изображения по идентификатору
+        /// </summary>
+        /// <returns>Возвращает файл изображения в бинарном представлении, в формате JPG..</returns>
+        /// <param name="fileId">Идентификатор изображения</param>
+        public async Task<byte[]?> GetImageAsByteAsync(string fileId)
+        {
+            if (Token != null)
+            {
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                if (ignoreTLS == true)
+                {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    ServicePointManager.ServerCertificateValidationCallback +=
+                        (sender, cert, chain, sslPolicyErrors) => { return true; };
+                    clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                }
+                using (var client = new HttpClient(clientHandler))
+                {
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, URL + $"/files/{fileId}/content");
+
+                    request.Headers.Add("Accept", "application/jpg");
+                    request.Headers.Add("Authorization", "Bearer " + Token.AccessToken);
+
+                    HttpResponseMessage response = await client.SendAsync(request);
+                    response.EnsureSuccessStatusCode();
+                    return await response.Content.ReadAsByteArrayAsync();
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// Получение списка моделей
+        /// </summary>
+        /// <returns>Model</returns>
+        /// <param name="model">Идентификатор изображения</param>
+        public async Task<Model?> ModelsAsync()
+        {
+            if (ExpiresAt < ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds())
+            {
+                await CreateTokenAsync();
+            }
+            if (Token != null)
+            {
+                HttpClientHandler clientHandler = new HttpClientHandler();
+
                 Model? DeserializedModel = null;
 
                 if (ignoreTLS == true)
@@ -204,13 +308,13 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
                 using (var client = new HttpClient(clientHandler))
                 {
 
-                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, URL + "models/" + model);
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, URL + "models/");
 
                     request.Headers.Add("Authorization", "Bearer " + Token.AccessToken);
 
                     HttpResponseMessage response = await client.SendAsync(request);
                     response.EnsureSuccessStatusCode();
-                    responseBody = await response.Content.ReadAsStringAsync();
+                    string responseBody = await response.Content.ReadAsStringAsync();
                     DeserializedModel = JsonSerializer.Deserialize<Model>(responseBody);
 
                     client.Dispose();
@@ -223,5 +327,18 @@ namespace LikhodedDynamics.Sber.GigaChatSDK
             }
         }
 
+        public string? GetFileId(string _messageContent)
+        {
+            string pattern = "<img\\s+src=\"(.*?)\"";
+            Match match = Regex.Match(_messageContent, pattern);
+            if (match.Success)
+            {
+                return match.Groups[1].Value;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
