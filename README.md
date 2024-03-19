@@ -1,9 +1,5 @@
 
-
-<h1 align="center">
-  <br>
-  <a href="https://github.com/likhoded/GigaChat-.NET"><img src="https://github.com/likhoded/GigaChatSDK/blob/master/Gigachat_Sber.png?raw=true" alt=".NET GigaChat"></a>
-</h1>
+![alt GigaChat.NET](Gigachat_Sber.png "GigaChat.NET")
 
 <h4 align="center">GigaChat-.NET.</h4>
       
