@@ -57,7 +57,7 @@ NuGet\Install-Package GigaChatSDK -Version 1.0.5
 
 ### Иницилизация:
 ```cs-sharp
-public static GigaChat Chat = new GigaChat("Ваши авторизационные данные", IsCommercial, IgnoreTLS, SaveImage);
+public static GigaChat Chat = new GigaChat("Ваши авторизационные данные", bool IsCommercial, bool IgnoreTLS, bool SaveImage);
 ```
 ### Получение токена:
 ```cs-sharp
