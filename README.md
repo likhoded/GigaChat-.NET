@@ -43,6 +43,8 @@ NuGet\Install-Package GigaChatSDK -Version 1.0.5
 > [!NOTE]  
 >Пакет поддерживает .NET Standard 2.1
 
+[GitVerse](https://gitverse.ru/who_is_likhoded/GigaChat.NET)
+
 ## Возможности
 
 | Возможность | Статус |
