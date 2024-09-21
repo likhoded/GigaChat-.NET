@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace LikhodedDynamics.Sber.GigaChatSDK.Models
+namespace LD.Sber.GigaChatSDK.Models
 {
     public class Choice
     {

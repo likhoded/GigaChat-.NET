@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GigaChatSDK", "GigaChatSDK\GigaChatSDK.csproj", "{DAA0C772-7FD9-4080-B513-1A053DE0F1E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{1EFBB3AD-6BD7-4328-82E3-21E773FAF472}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{A2013429-1A43-4E7B-89CC-4C28B6DF081D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DAA0C772-7FD9-4080-B513-1A053DE0F1E4} = {DAA0C772-7FD9-4080-B513-1A053DE0F1E4}
 	EndProjectSection
@@ -20,10 +20,10 @@ Global
 		{DAA0C772-7FD9-4080-B513-1A053DE0F1E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAA0C772-7FD9-4080-B513-1A053DE0F1E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAA0C772-7FD9-4080-B513-1A053DE0F1E4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1EFBB3AD-6BD7-4328-82E3-21E773FAF472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1EFBB3AD-6BD7-4328-82E3-21E773FAF472}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1EFBB3AD-6BD7-4328-82E3-21E773FAF472}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1EFBB3AD-6BD7-4328-82E3-21E773FAF472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2013429-1A43-4E7B-89CC-4C28B6DF081D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2013429-1A43-4E7B-89CC-4C28B6DF081D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2013429-1A43-4E7B-89CC-4C28B6DF081D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2013429-1A43-4E7B-89CC-4C28B6DF081D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

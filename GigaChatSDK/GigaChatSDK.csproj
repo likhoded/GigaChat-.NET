@@ -8,6 +8,9 @@ Unofficial .NET Library for working with Giga Chat AI by Sber/ Неофициа�
     <PackageProjectUrl>https://github.com/likhoded/GigaChatSDK</PackageProjectUrl>
     <RepositoryUrl>https://github.com/likhoded/GigaChatSDK</RepositoryUrl>
     <PackageTags>GigaChat</PackageTags>
+    <Version>1.0.5</Version>
+    <Title>GigaChatSDK</Title>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

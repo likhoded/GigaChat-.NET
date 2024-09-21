@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Xml.Linq;
 
-namespace GigaChatSDK.Models
+namespace LD.Sber.GigaChatSDK.Models
 {
     public class EmbeddingRequest
     {

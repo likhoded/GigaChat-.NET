@@ -1,10 +1,9 @@
-﻿using LikhodedDynamics.Sber.GigaChatSDK.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace GigaChatSDK.Models
+namespace LD.Sber.GigaChatSDK.Models
 {
     public class EmbeddingData
     {
