@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.Json.Serialization;
+
+namespace GigaChatSDK.Models
+{
+    public class FunctionParameters
+    {
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        [JsonPropertyName("properties")]
+        public Dictionary<string, ParameterProperty> Properties { get; set; }
+
+        [JsonPropertyName("required")]
+        public List<string> Required { get; set; }
+    }
+}

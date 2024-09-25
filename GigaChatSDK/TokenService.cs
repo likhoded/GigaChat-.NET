@@ -14,7 +14,15 @@ namespace GigaChatSDK
     public class TokenService: ITokenService
     {
         private readonly IHttpService httpService;
+        /// <summary>
+        /// Авторизационные данные
+        /// </summary>
         private readonly string secretKey;
+        /// <summary>
+        /// Версия API, к которой предоставляется доступ. Нужное значение параметра scope вы найдете в личном кабинете после создания проекта.
+        /// GIGACHAT_API_PERS — доступ для физических лиц.
+        /// GIGACHAT_API_CORP — доступ для юридических лиц.
+        /// </summary>
         private readonly bool isCommercial;
         public long? ExpiresAt { get; private set; }
         public Token Token { get; private set; }

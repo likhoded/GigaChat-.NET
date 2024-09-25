@@ -24,6 +24,11 @@ namespace LD.Sber.GigaChatSDK.Models
 
         [JsonPropertyName("messages")]
         public List<MessageContent> messages { get; set; }
+        [JsonPropertyName("functions")]
+        public List<FunctionDescription>? functions { get; set; } // Поле для списка функций
+
+        [JsonPropertyName("function_call")]
+        public object? function_call { get; set; } // Авто-вызов функций
         /// <summary>
         /// Температура выборки в диапазоне от ноля до двух. Чем выше значение, тем более случайным будет ответ модели.
         /// По умолчанию: 0.87
@@ -57,11 +62,21 @@ namespace LD.Sber.GigaChatSDK.Models
         /// </summary>
         [JsonPropertyName("max_tokens")]
         public long max_tokens { get; set; }
-        public MessageQuery(List<MessageContent>? messages = null, string model = "GigaChat:latest",  float temperature = 0.87f, float top_p = 0.47f, long n = 1, bool stream = false, long max_tokens = 512)
+        public MessageQuery(
+            List<MessageContent>? messages = null,
+            List<FunctionDescription>? functions = null,
+            object? function_call = null,
+            string model = "GigaChat:latest",  
+            float temperature = 0.87f, 
+            float top_p = 0.47f, 
+            long n = 1, 
+            bool stream = false, 
+            long max_tokens = 512)
         {
-            List<MessageContent> Contents = new List<MessageContent>();
             this.model = model;
-            this.messages = messages ?? Contents;
+            this.messages = messages ?? new List<MessageContent>();
+            this.functions = functions ?? new List<FunctionDescription>();
+            this.function_call = function_call ?? "auto";
             this.temperature = temperature;
             this.top_p = top_p;
             this.n = n;

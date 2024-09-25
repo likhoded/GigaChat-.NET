@@ -11,13 +11,17 @@ namespace GigaChatSDK
 {
     public class HttpService : IHttpService
     {
+        /// <summary>
+        /// true - включает игнорирование сертификатов безопасности
+        /// Необходимо для систем имеющих проблемы с сертификатами МинЦифр.
+        /// </summary>
         private readonly bool ignoreTLS;
 
         public HttpService(bool ignoreTLS)
         {
             this.ignoreTLS = ignoreTLS;
         }
-
+        /// <param name="ignoreTLS">true - включает игнорирование сертификатов безопасности.Необходимо для систем имеющих проблемы с сертификатами МинЦифр.</param>
         public HttpClientHandler CreateHttpClientHandler(bool ignoreTLS)
         {
             var handler = new HttpClientHandler();

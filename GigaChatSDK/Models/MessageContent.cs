@@ -23,10 +23,20 @@ namespace LD.Sber.GigaChatSDK.Models
         [JsonPropertyName("content")]
         public string content { get; set; }
 
-        public MessageContent(string role, string content)
+        /// <summary>
+        /// Идентификатор, объединяющий массив функций, переданных в запросе.
+        /// </summary>
+        [JsonPropertyName("functions_state_id")]
+        public Guid? functionsStateId { get; set; }
+        [JsonPropertyName("function_call")]
+        public FunctionCall? functionCall { get; set; }
+
+        public MessageContent(string role, string content, Guid? functionsStateId = null, FunctionCall? functionCall = null)
         {
             this.role = role;
             this.content = content;
+            this.functionsStateId = functionsStateId;
+            this.functionCall = functionCall;
         }
     }
 }
