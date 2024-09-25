@@ -1,9 +1,5 @@
 
-
-<h1 align="center">
-  <br>
-  <a href="https://github.com/likhoded/GigaChat-.NET"><img src="https://github.com/likhoded/GigaChatSDK/blob/master/Gigachat_Sber.png?raw=true" alt=".NET GigaChat"></a>
-</h1>
+![alt GigaChat.NET](Gigachat_Sber.png "GigaChat.NET")
 
 <h4 align="center">GigaChat-.NET.</h4>
       
@@ -22,7 +18,7 @@
   
 **.NET GigaChat** - это библиотека .NET для работы с ИИ от **Сбера**, который способен вести диалог с пользователем, писать код, создавать тексты и генерировать изображения прямо в ходе диалога.
 
-
+Если данный репозиторий оказался полезным для вас, не забудьте поставить ⭐
 <p align="right">
 <sub>(Preview)</sub>
 </p>
@@ -63,7 +59,7 @@ NuGet\Install-Package GigaChatSDK -Version 1.0.5
 
 ### Иницилизация:
 ```cs-sharp
-public static GigaChat Chat = new GigaChat("Ваши авторизационные данные", IsCommercial, IgnoreTLS, SaveImage);
+public static GigaChat Chat = new GigaChat("Ваши авторизационные данные", bool IsCommercial, bool IgnoreTLS, bool SaveImage);
 ```
 ### Получение токена:
 ```cs-sharp
