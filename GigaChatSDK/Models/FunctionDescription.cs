@@ -1,6 +1,4 @@
-﻿using GigaChatSDK.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace LD.Sber.GigaChatSDK.Models

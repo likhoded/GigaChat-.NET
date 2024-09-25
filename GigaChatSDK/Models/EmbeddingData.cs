@@ -11,17 +11,17 @@ namespace LD.Sber.GigaChatSDK.Models
         public string @object { get; set; }
 
         [JsonPropertyName("embedding")]
-        public List<float> embedding { get; set; }
+        public List<float> Embedding { get; set; }
 
         [JsonPropertyName("index")]
-        public int index { get; set; }
+        public int Index { get; set; }
 
         public EmbeddingData(string @object = "embedding",List<float> embedding = null, int index = 0)
         {
             List<float> embeddings = new List<float>();
             this.@object = @object;
-            this.embedding = embedding ?? embeddings;
-            this.index = index;
+            this.Embedding = embedding ?? embeddings;
+            this.Index = index;
         }
     }
 }

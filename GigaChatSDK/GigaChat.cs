@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.Json;
@@ -10,7 +9,6 @@ using LD.Sber.GigaChatSDK.Models;
 using LD.Sber.GigaChatSDK.Interfaces;
 using static System.Net.Mime.MediaTypeNames;
 using System.Text;
-using System.Linq;
 
 namespace LD.Sber.GigaChatSDK
 {
@@ -71,7 +69,7 @@ namespace LD.Sber.GigaChatSDK
                 throw new ArgumentException("Message cannot be empty.", nameof(message));
 
             var query = new MessageQuery();
-            query.messages.Add(new MessageContent(role, message));
+            query.Messages.Add(new MessageContent(role, message));
             return await CompletionsAsync(query);
         }
         /// <summary>

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using LD.Sber.GigaChatSDK.Models;
-using LD.Sber.GigaChatSDK.Utils;
 
 namespace LD.Sber.GigaChatSDK.Interfaces
 {

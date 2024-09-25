@@ -1,9 +1,6 @@
 ﻿using LD.Sber.GigaChatSDK.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using System.Net.Http.Headers;
 using System.Net;
 using System.Net.Http;
 

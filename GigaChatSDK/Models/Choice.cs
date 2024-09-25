@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace LD.Sber.GigaChatSDK.Models
 {
     public class Choice
     {
         [JsonPropertyName("message")]
-        public MessageContent? message { get; set; }
+        public MessageContent? Message { get; set; }
 
         [JsonPropertyName("index")]
-        public int index { get; set; }
+        public int Index { get; set; }
 
         [JsonPropertyName("finish_reason")]
-        public string? finish_reason { get; set; }
+        public string? FinishReason { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace LD.Sber.GigaChatSDK.Models
@@ -11,9 +9,9 @@ namespace LD.Sber.GigaChatSDK.Models
         public string? @object { get; set; }
 
         [JsonPropertyName("data")]
-        public List<EmbeddingData>? data { get; set; }
+        public List<EmbeddingData>? Data { get; set; }
 
         [JsonPropertyName("model")]
-        public string? model { get; set; }
+        public string? Model { get; set; }
     }
 }

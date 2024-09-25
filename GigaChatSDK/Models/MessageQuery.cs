@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace LD.Sber.GigaChatSDK.Models
@@ -16,26 +14,26 @@ namespace LD.Sber.GigaChatSDK.Models
         /// По умолчанию: GigaChat:latest
         /// </summary>
         [JsonPropertyName("model")]
-        public string model { get; set; }
+        public string Model { get; set; }
         /// <summary>
         /// Массив передаваемых сообщений
         /// По умолчанию: -
         /// </summary>
 
         [JsonPropertyName("messages")]
-        public List<MessageContent> messages { get; set; }
+        public List<MessageContent> Messages { get; set; }
         [JsonPropertyName("functions")]
-        public List<FunctionDescription>? functions { get; set; } // Поле для списка функций
+        public List<FunctionDescription>? Functions { get; set; } // Поле для списка функций
 
         [JsonPropertyName("function_call")]
-        public object? function_call { get; set; } // Авто-вызов функций
+        public object? FunctionCall { get; set; } // Авто-вызов функций
         /// <summary>
         /// Температура выборки в диапазоне от ноля до двух. Чем выше значение, тем более случайным будет ответ модели.
         /// По умолчанию: 0.87
         /// </summary>
 
         [JsonPropertyName("temperature")]
-        public float temperature { get; set; }
+        public float Temperature { get; set; }
         /// <summary>
         /// Параметр используется как альтернатива temperature. 
         /// Задает вероятностную массу токенов, которые должна учитывать модель. 
@@ -43,25 +41,25 @@ namespace LD.Sber.GigaChatSDK.Models
         /// По умолчанию: 0.47
         /// </summary>
         [JsonPropertyName("top_p")]
-        public float top_p { get; set; }
+        public float TopP { get; set; }
         /// <summary>
         /// Количество вариантов ответов, которые нужно сгенерировать для каждого входного сообщения
         /// По умолчанию: 1
         /// </summary>
         [JsonPropertyName("n")]
-        public long n { get; set; }
+        public long N { get; set; }
         /// <summary>
         /// Указывает, что сообщения надо передавать по частям в потоке.
         /// По умолчанию: false
         /// </summary>
         [JsonPropertyName("stream")]
-        public bool stream { get; set; }
+        public bool Stream { get; set; }
         /// <summary>
         /// Максимальное количество токенов, которые будут использованы для создания ответов
         /// По умолчанию: 512
         /// </summary>
         [JsonPropertyName("max_tokens")]
-        public long max_tokens { get; set; }
+        public long MaxTokens { get; set; }
         public MessageQuery(
             List<MessageContent>? messages = null,
             List<FunctionDescription>? functions = null,
@@ -73,15 +71,15 @@ namespace LD.Sber.GigaChatSDK.Models
             bool stream = false, 
             long max_tokens = 512)
         {
-            this.model = model;
-            this.messages = messages ?? new List<MessageContent>();
-            this.functions = functions ?? new List<FunctionDescription>();
-            this.function_call = function_call ?? "auto";
-            this.temperature = temperature;
-            this.top_p = top_p;
-            this.n = n;
-            this.stream = stream;
-            this.max_tokens = max_tokens;
+            this.Model = model;
+            this.Messages = messages ?? new List<MessageContent>();
+            this.Functions = functions ?? new List<FunctionDescription>();
+            this.FunctionCall = function_call ?? "auto";
+            this.Temperature = temperature;
+            this.TopP = top_p;
+            this.N = n;
+            this.Stream = stream;
+            this.MaxTokens = max_tokens;
         }
     }
 }

@@ -9,16 +9,16 @@ namespace LD.Sber.GigaChatSDK.Models
     public class EmbeddingRequest
     {
         [JsonPropertyName("models")]
-        public string models { get; set; }
+        public string Models { get; set; }
 
         [JsonPropertyName("input")]
-        public List<string> input { get; set; }
+        public List<string> Input { get; set; }
 
         public EmbeddingRequest(string models = "Embeddings", List<string> input = null)
         {
             List<string> inputs = new List<string>();
-            this.models = models;
-            this.input = input ?? inputs;
+            this.Models = models;
+            this.Input = input ?? inputs;
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace LD.Sber.GigaChatSDK.Models
@@ -9,16 +6,16 @@ namespace LD.Sber.GigaChatSDK.Models
     public class Response
     {
         [JsonPropertyName("choices")]
-        public List<Choice>? choices { get; set; }
+        public List<Choice>? Choices { get; set; }
 
         [JsonPropertyName("created")]
-        public int created { get; set; }
+        public int Created { get; set; }
 
         [JsonPropertyName("model")]
-        public string? model { get; set; }
+        public string? Model { get; set; }
 
         [JsonPropertyName("usage")]
-        public Usage? usage { get; set; }
+        public Usage? Usage { get; set; }
 
         [JsonPropertyName("object")]
         public string? @object { get; set; }
