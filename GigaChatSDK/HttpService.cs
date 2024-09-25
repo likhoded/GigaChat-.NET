@@ -8,6 +8,7 @@ namespace LD.Sber.GigaChatSDK
 {
     public class HttpService : IHttpService
     {
+        private readonly HttpClient client;
         /// <summary>
         /// true - включает игнорирование сертификатов безопасности
         /// Необходимо для систем имеющих проблемы с сертификатами МинЦифр.
@@ -17,6 +18,7 @@ namespace LD.Sber.GigaChatSDK
         public HttpService(bool ignoreTLS)
         {
             this.ignoreTLS = ignoreTLS;
+            client = new HttpClient(CreateHttpClientHandler(this.ignoreTLS));
         }
         /// <param name="ignoreTLS">true - включает игнорирование сертификатов безопасности.Необходимо для систем имеющих проблемы с сертификатами МинЦифр.</param>
         public HttpClientHandler CreateHttpClientHandler(bool ignoreTLS)
@@ -35,12 +37,9 @@ namespace LD.Sber.GigaChatSDK
         {
             try
             {
-                using (var client = new HttpClient(CreateHttpClientHandler(ignoreTLS)))
-                {
-                    var response = await client.SendAsync(request);
-                    response.EnsureSuccessStatusCode();
-                    return await response.Content.ReadAsStringAsync();
-                }
+                var response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode(); // Проверка успешности ответа
+                return await response.Content.ReadAsStringAsync();
             }
             catch (HttpRequestException ex)
             {

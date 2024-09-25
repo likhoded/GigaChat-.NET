@@ -151,7 +151,7 @@ namespace LD.Sber.GigaChatSDK
 
         private async Task ValidateToken()
         {
-            if (tokenService.ExpiresAt < ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds())
+            if (tokenService.Token == null || tokenService.ExpiresAt < ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds())
                 await CreateTokenAsync();
         }
     }
