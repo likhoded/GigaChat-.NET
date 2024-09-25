@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Net;
 using System.Net.Http;
 
-namespace GigaChatSDK
+namespace LD.Sber.GigaChatSDK
 {
     public class HttpService : IHttpService
     {

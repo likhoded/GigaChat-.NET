@@ -6,7 +6,6 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.IO;
 
-using LD.Sber.GigaChatSDK.Utils;
 using LD.Sber.GigaChatSDK.Models;
 using LD.Sber.GigaChatSDK.Interfaces;
 using static System.Net.Mime.MediaTypeNames;

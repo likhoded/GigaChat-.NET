@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace GigaChatSDK
+namespace LD.Sber.GigaChatSDK
 {
     public class TokenService: ITokenService
     {
