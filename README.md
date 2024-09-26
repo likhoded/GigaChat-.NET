@@ -33,7 +33,7 @@
 
 Вы можете установить пакет, используя **[NuGet](https://www.nuget.org/packages/GigaChatSDK/1.0.5)** 
 ```bash
-NuGet\Install-Package GigaChatSDK -Version 1.0.5
+NuGet\Install-Package GigaChatSDK -Version 1.1.0
 ```
 
 > [!NOTE]  
@@ -50,7 +50,7 @@ NuGet\Install-Package GigaChatSDK -Version 1.0.5
 |Получение ответа от модели|✔️|
 |Эмбеддинги(векторное представление текста)|✔️|
 |Генерация изображений|✔️|
-|Работа с функциями|✔️|
+|Работа с пользовательскими [функциями](https://developers.sber.ru/docs/ru/gigachat/api/function-calling)|✔️|
 
 
 # Начало работы
