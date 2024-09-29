@@ -96,12 +96,17 @@ await Chat.ModelsAsync();
 await Chat.GetFileId(string MessageContent);
 ```
 ## Примеры
+
+### Примеры использования функций:
+Далее вы можете ознакомиться с примером, в котором модель сама по ходу диалога понимает, что нужно вызывать функцию отправки СМС,
+с заданными содержимым и номером телефона получателя.
+[Отправка СМС](https://gitverse.ru/who_is_likhoded/GigaChat.NET.Examples/content/master/SendSMS)
+
 ### Пример получения строки ответа из отправленного запроса с использованием контекстозависимой перегрузки метода CompletionsAsync:
 ```cs-sharp
 var response = await gigaChatClient.CompletionsAsync(query);
 Console.WriteLine(response.choices.LastOrDefault().message.content);
 ```
-`
 ### Пример получения изображения из отправленного запроса:
 ```cs-sharp
 Response response = await Chat.CompletionsAsync("Нарисуй рыжего кота с зелеными глазами");
