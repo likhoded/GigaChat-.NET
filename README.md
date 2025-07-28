@@ -31,7 +31,7 @@
 
 [Перед началом работы рекомендуем ознакомиться с документацией по API](https://developers.sber.ru/docs/ru/gigachat/api)
 
-Вы можете установить пакет, используя **[NuGet](https://www.nuget.org/packages/GigaChatSDK/1.0.5)** 
+Вы можете установить пакет, используя **[NuGet](https://www.nuget.org/packages/GigaChatSDK/1.1.0)** 
 ```bash
 NuGet\Install-Package GigaChatSDK -Version 1.1.0
 ```
